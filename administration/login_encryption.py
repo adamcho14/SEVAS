@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import rsa
-import base64
 # this creates the private and public keys used to encrypt voter's login
 (pubkey, privkey) = rsa.newkeys(512)
 

@@ -2,7 +2,6 @@
 # coding: utf-8
 
 import json
-from M2Crypto import BIO, SMIME, X509
 import config as can_n
 import sys
 import gnupg
@@ -21,7 +20,7 @@ def select_candidates():
 
 def decrypt(s):
     gpg = gnupg.GPG()
-    with open("privkey.pem", 'r') as file:
+    with open("privkey.asc", 'r') as file:
          my_key = file.read()
     import_result = gpg.import_keys(my_key)
     data = gpg.decrypt(s)
@@ -40,6 +39,8 @@ def parse(s):
 # 3 ... we expect the first digit of value,
 # 4 ... we expect '>' or a digit
 def validate(l):
+    if len(l) == 0:
+        return False
     state = 0
     for i in l:
         if state == 0:  # checking '<'
@@ -138,10 +139,14 @@ for c in candidates:
             election_dk[c[0]] += 1
 
 # print the final results
-print("Toto sú výsledky volieb:")
-for c in candidates:
-    print()
-    print(c[1], c[2])
-    print("Áno:", election_yes[c[0]])
-    print("Nie:", election_no[c[0]])
-    print("Zdržali sa:", election_dk[c[0]])
+with open("results.txt", 'w') as res_file:
+    res_file.write("Toto sú výsledky volieb:")
+    for c in candidates:
+        res_file.write("\n\n")
+        res_file.write(str(c[1]) + " " + str(c[2]) + "\n")
+        res_file.write("Áno: " + str(election_yes[c[0]]) + "\n")
+        res_file.write("Nie: " + str(election_no[c[0]]) + "\n")
+        res_file.write("Zdržali sa: " + str(election_dk[c[0]]) + "\n")
+
+with open("results.txt", 'r') as res_file:
+    print(res_file.read())

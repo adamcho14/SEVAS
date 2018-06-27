@@ -16,7 +16,7 @@ in any available Internet browser.
 
 * _Python_ as the primary back-end programming language
 * _JavaScript_, _HTML_ and _CSS_ for the front end
-* _S/MIME_ protocol
+* _OpenPGP_ standard
 * _Cosign_ to provide logging in
 * _Shamir's Secret-Sharing Scheme_
 * _Apache_ server
@@ -28,7 +28,7 @@ in any available Internet browser.
 * vote collection
 * vote counting
 * user interface for the election commission
-* form encryption using _S/MIME_ protocol for E-mail communication
+* form encryption using _OpenPGP_ protocol for electronic communication
 * final database model
 * logging in using _Cosign_
 
@@ -36,5 +36,18 @@ in any available Internet browser.
 * configuration of _Apache 2_ server for logging in via `Cosign`
 * deployment in the structures of FMPH
 * features I can't remember while writing this
+
+#How to run the voting program on `localhost`
+* Add your login to the database using `administration/add_voter.py`
+* Run the `server.py`
+* Type in to your browser `localhost:8000/test_index.py`
+* Enjoy voting!
+
+#How to run the vote counting
+* Run `local/transfer.py`
+* Run `local/select_candidates.py`
+* Run `local/counting.py`
+* Demo key with passphrase `hello world` is provided
+* Results can be displayed in `results.txt`
 
 You can find the structure of this project in `CONTENTS.md`.

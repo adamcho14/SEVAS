@@ -3,10 +3,13 @@
 
 import cgi
 import sqlite3
+import rsa
+import base64
 import os
 
-if 'REMOTE_USER' in os.environ:
-    login = os.environ['REMOTE_USER']
+if True:
+    with open("login.txt", 'r') as file:
+        login = file.read()
 
     form = cgi.FieldStorage()
     vote = form.getvalue('vote')
@@ -59,10 +62,14 @@ if 'REMOTE_USER' in os.environ:
 
 
     print """<br>
-<a href=cosign/coslogout.php?backurl=/index.py>Odhlásiť sa</a>
+<form method="post" action="test_index.py">
+<input type="submit" name ="return" class="btn btn-primary" value="Odhlásiť sa">
+</form>
 </body>
 
 </html>"""
+
+    open("login.txt", 'w').close()
 
 else:
     print

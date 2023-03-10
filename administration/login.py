@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-#This is to be provided by Cosign, but for now...
-
 from os import environ
 import cgi, cgitb
 
